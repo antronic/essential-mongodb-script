@@ -32,8 +32,29 @@ interface IndexDocument extends Document {
   name: string;
 }
 
+interface StatsDocument extends Document {
+  ok: number,
+  capped: boolean,
+  wiredTiger: {
+    [key: string]: string | { [key: string]: string | number }
+  },
+  sharded: boolean,
+  size: number,
+  count: number,
+  numOrphanDocs: number,
+  storageSize: number,
+  totalIndexSize: number,
+  totalSize: number,
+  indexSizes: { [key: string]: number },
+  avgObjSize: number,
+  ns: string,
+  nindexes: number,
+  scaleFactor: number
+}
+
 type Collection = {
   getIndexes: () => IndexDocument[]
+  stats: () => Document
 }
 
 type Database = {
