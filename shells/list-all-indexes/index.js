@@ -6,19 +6,20 @@ const excludeCollections = [
     'system.version',
     'system.sessions',
 ];
-function start() {
+function getIndexes() {
     const dbs = db.adminCommand({ listDatabases: 1 })
         .databases.map(db => db.name);
     for (const dbName of dbs) {
         const collections = db.getSiblingDB(dbName).getCollectionNames();
         // Get all indexes for each collection
         for (const collectionName of collections) {
-            const indexes = db.getSiblingDB(dbName)
+            let indexes = db.getSiblingDB(dbName)
                 .getCollection(collectionName)
                 .getIndexes();
             console.log(`\n// ${dbName}.${collectionName}`);
             // console.log(`Indexes: ${JSON.stringify(indexes, null, 2)}`)
             // console.log(indexes)
+            indexes = indexes.filter(index => index.name !== '_id_');
             // Create Index query commands
             const commands = indexes.map(index => {
                 const keys = Object.keys(index.key)
@@ -29,11 +30,14 @@ db.getSiblingDB('${dbName}')
   .getCollection('${collectionName}')
   .createIndex(
     { ${keys} },
-    { name: '${index.name}' })
-        `;
+    `;
             });
+            // { name: '${index.name}' })
             commands.forEach(command => console.log(command));
         }
     }
+}
+function start() {
+    getIndexes();
 }
 start();
