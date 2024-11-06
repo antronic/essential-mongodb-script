@@ -35,8 +35,7 @@ function getIndexes() {
         return `
 db.getSiblingDB('${dbName}')
   .getCollection('${collectionName}')
-  .createIndex(
-    { ${keys} },
+  .createIndex({ ${keys} })
     `
   })
   // { name: '${index.name}' })
