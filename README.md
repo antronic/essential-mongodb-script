@@ -4,7 +4,7 @@
 - `mongosh` installed on your machine
 
 ## Available Scripts
-- [List all indexes](./list-all-indexes.md) - With command for listing them
+- [List all indexes](./shells/list-all-indexes/README.md) - With command for listing them
   - With command for creating them
 
 
