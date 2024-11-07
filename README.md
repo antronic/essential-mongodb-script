@@ -6,6 +6,7 @@
 ## Available Scripts
 - [List all indexes](./shells/list-all-indexes/README.md) - With command for listing them
   - With command for creating them
+- [Count all documents](./shells/count-all-documents/README.md) - With command for counting them
 
 
 ## Disclaimer
