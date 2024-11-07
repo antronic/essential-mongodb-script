@@ -1,4 +1,7 @@
 /// reference path="../../types/shell.d.ts" />
+// ===========================================================
+// ===========================================================
+// ====================== CONFIGURATION ======================
 const excludeCollections = [
   'system.indexes',
   'system.users',
@@ -6,6 +9,11 @@ const excludeCollections = [
   'system.sessions',
 ]
 
+const excludeIndexOptions = new Set(['expireAfterSeconds', 'unique'])
+
+// ===========================================================
+// ===========================================================
+// ===========================================================
 function getIndexes() {
   const dbs = db.adminCommand({ listDatabases: 1 })
     .databases.map(db => db.name)
@@ -24,18 +32,34 @@ function getIndexes() {
       // console.log(`Indexes: ${JSON.stringify(indexes, null, 2)}`)
       // console.log(indexes)
 
-      indexes = indexes.filter(index => index.name !== '_id_')
+      // =============================================
+      //
+      indexes = indexes.filter((index) => {
+        const { key, v, name, ...options } = index
+        const hasExcludeOptions = Object.keys(options).some(opt => excludeIndexOptions.has(opt))
 
+        return (index.name !== '_id_' && !hasExcludeOptions)
+      })
+      //
       // Create Index query commands
       const commands = indexes.map(index => {
+        //
         const keys = Object.keys(index.key)
-          .map(key => `${key}: 1`)
+          .map((key) => {
+            //
+            return `"${key}": ${index.key[key]}`
+          })
           .join(', ')
+        // =============================================
+        // Keys
+        const { key, v, name, ...options } = index
+        const optionsString = JSON.stringify(options)
+        // =============================================
 
         return `
 db.getSiblingDB('${dbName}')
   .getCollection('${collectionName}')
-  .createIndex({ ${keys} })
+  .createIndex({ ${keys} }, ${optionsString})
     `
   })
   // { name: '${index.name}' })

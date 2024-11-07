@@ -1,6 +1,12 @@
 "use strict";
 (function () {
+    // =====================================
+    // Determine the databases to exclude
+    // =====================================
     const excludeDbs = ['admin', 'config', 'local', 'test'];
+    // =====================================
+    // =====================================
+    // =====================================
     const reports = [];
     function numberCommafy(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
