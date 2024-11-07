@@ -1,5 +1,13 @@
 (function() {
+  // =====================================
+  // Determine the databases to exclude
+  // =====================================
+
   const excludeDbs = ['admin', 'config', 'local', 'test']
+
+  // =====================================
+  // =====================================
+  // =====================================
 
   const reports: { dbName: string, collectionName: string, count: number }[] = []
 
