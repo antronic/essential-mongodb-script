@@ -1,4 +1,6 @@
 # Essential MongoDB Script
+Project time spent:
+[![wakatime](https://wakatime.com/badge/user/20f31d58-e08c-46c7-9266-c37aed16eebc/project/15ea6c90-3002-4ddf-819a-fd42e9d401da.svg?style=for-the-badge)](https://wakatime.com/badge/user/20f31d58-e08c-46c7-9266-c37aed16eebc/project/15ea6c90-3002-4ddf-819a-fd42e9d401da)
 
 ## Pre-requisite
 - [`mongosh`](https://www.mongodb.com/docs/mongodb-shell/install/) installed on your machine
