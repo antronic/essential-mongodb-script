@@ -1,7 +1,7 @@
 # Essential MongoDB Script
 
 ## Pre-requisite
-- `mongosh` installed on your machine
+- [`mongosh`](https://www.mongodb.com/docs/mongodb-shell/install/) installed on your machine
 
 ## Available Scripts
 - [List all indexes](./shells/list-all-indexes/README.md) - With command for listing them
